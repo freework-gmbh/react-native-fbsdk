@@ -79,13 +79,13 @@ function unzipFramework (next) {
 }
 
 function correctSearchPaths (next) {
-  const rctfbsdkProjectPath = './node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj/project.pbxproj';
+  const rctfbsdkProjectPath = './node_modules/@freework/react-native-fbsdk/ios/RCTFBSDK.xcodeproj/project.pbxproj';
   const rctfbsdkProject = xcode.project(rctfbsdkProjectPath);
   rctfbsdkProject.parse(function (err) {
     if (err) {
       return next(err);
     }
-    rctfbsdkProject.updateBuildProperty('FRAMEWORK_SEARCH_PATHS', '"$(PROJECT_DIR)/../../../ios/Frameworks"');
+    rctfbsdkProject.updateBuildProperty('FRAMEWORK_SEARCH_PATHS', '"$(PROJECT_DIR)/../../../../ios/Frameworks"');
     fs.writeFileSync(rctfbsdkProjectPath, rctfbsdkProject.writeSync());
     console.log('Updated RCTFBSDK FRAMEWORK_SEARCH_PATHS');
     next();
